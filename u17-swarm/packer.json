@@ -90,8 +90,7 @@
   "post-processors": [
     {
       "output": "builds/{{.Provider}}-ubuntu1704.box",
-      "type": "vagrant",
-      "version": "0.0.1"
+      "type": "vagrant"
     }
   ]
 }
