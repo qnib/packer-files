@@ -91,7 +91,7 @@
     {
       "output": "builds/{{.Provider}}-ubuntu1704.box",
       "type": "vagrant",
-      "version": "v1"
+      "version": "0.0.1"
     }
   ]
 }
