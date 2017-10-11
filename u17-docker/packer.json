@@ -31,11 +31,15 @@
     },{
        "type": "file",
        "source": "files/daemon.json",
-       "destination": "/etc/docker/daemon.json"
+       "destination": "/home/vagrant/daemon.json"
     },{
        "type": "file",
        "source": "files/docker.service",
-       "destination": "/lib/systemd/system/docker.service"
+       "destination": "/home/vagrant/docker.service"
+    },{
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/move_files.sh"
     }
   ],
   "builders": [
