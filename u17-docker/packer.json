@@ -109,7 +109,7 @@
   ],
   "post-processors": [
     {
-      "output": "builds/{{.Provider}}-u704-docker.box",
+      "output": "builds/{{.Provider}}-u1704-docker.box",
       "type": "vagrant"
     }
   ]
