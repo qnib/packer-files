@@ -10,3 +10,4 @@ yum-config-manager \
 
 yum install -y docker-ce
 systemctl enable docker
+mkdir -p /etc/docker/

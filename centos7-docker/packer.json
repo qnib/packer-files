@@ -15,11 +15,15 @@
     },{
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "scripts/vbox-additions.sh"
+      "script": "scripts/docker.sh"
+    },{
+       "type": "file",
+       "source": "files/daemon.json",
+       "destination": "/home/vagrant/daemon.json"
     },{
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "scripts/docker.sh"
+      "script": "scripts/move_files.sh"
     }
   ],
   "builders": [
@@ -65,7 +69,7 @@
   ],
   "post-processors": [
     {
-      "output": "builds/{{.Provider}}-centos7.box",
+      "output": "builds/{{.Provider}}-centos7-docker.box",
       "type": "vagrant"
     }
   ]
