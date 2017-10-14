@@ -15,15 +15,11 @@
     },{
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "scripts/docker.sh"
-    },{
-       "type": "file",
-       "source": "files/daemon.json",
-       "destination": "/home/vagrant/daemon.json"
+      "script": "scripts/ipv4_forwarding.sh"
     },{
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "scripts/move_files.sh"
+      "script": "scripts/docker.sh"
     }
   ],
   "builders": [

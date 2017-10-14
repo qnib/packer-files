@@ -23,8 +23,7 @@
     },{
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "scripts/preload-ucp.sh"
-
+      "script": "scripts/preload-dtr.sh"
     }
   ],
   "builders": [
@@ -51,7 +50,7 @@
       "shutdown_command": "echo 'vagrant'|sudo -S /sbin/halt -h -p",
       "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
       "virtualbox_version_file": ".vbox_version",
-      "vm_name": "packer-centos7--docker-ucp-x86_64",
+      "vm_name": "packer-centos7-docker-dtr-x86_64",
       "vboxmanage": [
         [
           "modifyvm",
@@ -70,7 +69,7 @@
   ],
   "post-processors": [
     {
-      "output": "builds/{{.Provider}}-centos7-docker-ucp.box",
+      "output": "builds/{{.Provider}}-centos7-docker-dtr.box",
       "type": "vagrant"
     }
   ]
