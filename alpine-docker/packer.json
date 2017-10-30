@@ -2,8 +2,8 @@
   "description": "Build base Alpine Linux x86_64",
   "variables": {
       "disk_size": "10240",
-      "memory": "1024",
-      "cpus": "1"
+      "memory": "2048",
+      "cpus": "2"
   },
   "provisioners": [
     {
@@ -16,6 +16,7 @@
         "scripts/03vagrant.sh",
         "scripts/04sudoers.sh",
         "scripts/90virtualbox.sh",
+        "scripts/91docker.sh",
         "scripts/99minimize.sh"
       ],
       "override": {
@@ -32,7 +33,7 @@
 
       "guest_additions_mode": "disable",
       "guest_os_type": "Linux26_64",
-      "headless": false,
+      "headless": true,
       "disk_size": "{{user `disk_size`}}",
       "http_directory": "http",
 
