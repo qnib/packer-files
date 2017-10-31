@@ -3,7 +3,7 @@
 
 Vagrant.configure(2) do |config|
     config.vm.define 'alpine36' do |alpine|
-        alpine.vm.box = 'qnib/alpine36'
+        alpine.vm.box = 'qnib/alpine36-docker-ucp'
         alpine.vm.provider 'virtualbox' do |vb|
             vb.name = 'alpine3.6'
             vb.cpus = 2

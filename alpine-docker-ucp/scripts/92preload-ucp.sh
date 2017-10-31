@@ -2,6 +2,8 @@
 : ${UCP_VERSION:=2.2.3}
 
 service docker start
+docker ps >/dev/null
+sleep 1
 
 echo "Downloading docker/ucp:${UCP_VERSION}"
 docker pull docker/ucp:${UCP_VERSION}
