@@ -80,7 +80,7 @@
     [{
       "type": "vagrant",
       "vagrantfile_template": "Vagrantfile",
-      "output": "alpine-docker-ucp.box"
+      "output": "alpine-docker-dtr.box"
     }]
   ]
 }
