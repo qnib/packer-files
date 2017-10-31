@@ -1,5 +1,10 @@
 #!/bin/bash
 : ${DTRVERSION:=2.3.3}
+
+service docker start
+docker ps >/dev/null
+sleep 1
+
 echo "Downloading docker/dtr:${DTRVERSION}"
 docker pull docker/dtr:${DTRVERSION}
 
