@@ -1,0 +1,16 @@
+[Unit]
+Description=Docker Proxy
+Documentation=https://github.com/qnib/doxy
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=simple
+# the default is not to use systemd for cgroups because the delegate issues still
+# exists and systemd currently does not support the cgroup feature set required
+# for containers run by docker
+ExecStart=/usr/bin/doxy --pattern-key=hpc --debug --proxy-socket=/var/run/hpc.sock --gpu
+# restart the docker process if it exits prematurely
+Restart=on-failure
+StartLimitBurst=3
+StartLimitInterval=60s
