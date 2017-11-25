@@ -2,5 +2,5 @@
 set -x
 
 mkdir -p /home/ubuntu/confd/{conf.d,templates}
-mkdir -p /home/ubuntu/systemd/
-chown -R ubuntu: /home/ubuntu/confd /home/ubuntu/systemd
+mkdir -p /home/ubuntu/{slurm,systemd}
+chown -R ubuntu: /home/ubuntu/{confd,systemd,slurm}

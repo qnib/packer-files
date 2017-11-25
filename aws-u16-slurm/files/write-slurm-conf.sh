@@ -12,3 +12,6 @@ confd -onetime -backend env
 echo ">> Start slurmctld/slurmd"
 systemctl start slurmctld
 systemctl start slurmd
+
+echo ">> Restart doxy for good measure"
+systemctl restart doxy

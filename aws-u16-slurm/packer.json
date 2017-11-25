@@ -3,7 +3,7 @@
         "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
         "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
         "region":         "us-east-1",
-        "source_ami":     "ami-833aacf9"
+        "source_ami":     "ami-6fd94815"
   },
   "provisioners": [
     {
@@ -18,6 +18,10 @@
        "type": "file",
        "source": "files/write-slurm-conf.sh",
        "destination": "/home/ubuntu/write-slurm-conf.sh"
+    },{
+       "type": "file",
+       "source": "files/slurm/job-gpu.sh",
+       "destination": "/home/ubuntu/job-gpu.sh"
     },{
        "type": "file",
        "source": "files/systemd/slurmconfig.service",
