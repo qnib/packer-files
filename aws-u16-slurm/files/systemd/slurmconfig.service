@@ -1,0 +1,12 @@
+[Unit]
+Description=Write slurm.conf
+#After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/write-slurm-conf.sh
+RemainAfterExit=true
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target
