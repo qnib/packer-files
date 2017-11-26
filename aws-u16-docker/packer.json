@@ -3,8 +3,8 @@
         "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
         "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
         "region":         "us-east-1",
-        "ami_name":       "aws-docker"
-
+        "ami_name":       "aws-docker",
+        "source_ami":     "ami-004b8416"
   },
   "provisioners": [
     {
@@ -30,7 +30,7 @@
     "access_key": "{{user `aws_access_key`}}",
     "secret_key": "{{user `aws_secret_key`}}",
     "region": "{{user `region`}}",
-    "source_ami": "ami-da05a4a0",
+    "source_ami": "{{user `source_ami`}}",
     "instance_type": "t2.micro",
     "ssh_username": "ubuntu",
     "ami_name": "{{user `ami_name`}} {{timestamp}}"
