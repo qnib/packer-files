@@ -43,4 +43,5 @@ FastSchedule=0
 NodeName={{getenv "CONTROL_MACHINE"}} NodeAddr={{getenv "CONTROL_MACHINE_ADDR"}}
 
 # Create list
-PartitionName=all Nodes={{getenv "CONTROL_MACHINE"}} Default=YES MaxTime=INFINITE State=UP
+PartitionName=all Nodes=ALL Default=YES MaxTime=INFINITE State=UP
+#PartitionName=gpu Nodes=ALL Default=YES MaxTime=INFINITE State=UP

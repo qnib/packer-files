@@ -2,8 +2,7 @@
   "variables": {
         "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
         "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
-        "region":         "us-east-1",
-        "source_ami":     "ami-69c75613"
+        "region":         "us-east-1"
   },
   "provisioners": [
     {
@@ -13,7 +12,15 @@
     },{
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "scripts/nvidia.sh"
+      "script": "scripts/docker.sh"
+    },{
+       "type": "file",
+       "source": "files/doxy.service",
+       "destination": "/home/ubuntu/doxy.service"
+    },{
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/doxy.sh"
     }
   ],
   "builders": [{
@@ -21,9 +28,9 @@
     "access_key": "{{user `aws_access_key`}}",
     "secret_key": "{{user `aws_secret_key`}}",
     "region": "{{user `region`}}",
-    "source_ami": "{{user `source_ami`}}",
+    "source_ami": "ami-da05a4a0",
     "instance_type": "t2.micro",
     "ssh_username": "ubuntu",
-    "ami_name": "aws-docker-nvidia {{timestamp}}"
+    "ami_name": "aws-docker {{timestamp}}"
   }]
 }

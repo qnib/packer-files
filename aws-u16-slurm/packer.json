@@ -3,7 +3,8 @@
         "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
         "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
         "region":         "us-east-1",
-        "source_ami":     "ami-6fd94815"
+        "source_ami":     "ami-69c75613",
+        "ami_name":       "aws-docker-slurm"
   },
   "provisioners": [
     {
@@ -18,6 +19,10 @@
        "type": "file",
        "source": "files/write-slurm-conf.sh",
        "destination": "/home/ubuntu/write-slurm-conf.sh"
+    },{
+       "type": "file",
+       "source": "files/munge.key",
+       "destination": "/home/ubuntu/munge.key"
     },{
        "type": "file",
        "source": "files/slurm/job-gpu.sh",
@@ -48,6 +53,6 @@
     "source_ami": "{{user `source_ami`}}",
     "instance_type": "t2.micro",
     "ssh_username": "ubuntu",
-    "ami_name": "slurm-gpu-docker {{timestamp}}"
+    "ami_name": "{{user `ami_name`}} {{timestamp}}"
   }]
 }
