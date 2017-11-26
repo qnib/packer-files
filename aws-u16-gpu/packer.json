@@ -3,7 +3,7 @@
         "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
         "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
         "region":         "us-east-1",
-        "source_ami":     "ami-9ff362e5",
+        "source_ami":     "ami-c4bb2bbe",
         "ami_name":       "aws-docker-slurm-gpu"
 
   },
