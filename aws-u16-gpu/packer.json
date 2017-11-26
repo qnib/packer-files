@@ -3,7 +3,9 @@
         "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
         "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
         "region":         "us-east-1",
-        "source_ami":     "ami-69c75613"
+        "source_ami":     "ami-9ff362e5",
+        "ami_name":       "aws-docker-slurm-gpu"
+
   },
   "provisioners": [
     {
@@ -24,6 +26,6 @@
     "source_ami": "{{user `source_ami`}}",
     "instance_type": "t2.micro",
     "ssh_username": "ubuntu",
-    "ami_name": "aws-docker-nvidia {{timestamp}}"
+    "ami_name": "{{user `ami_name`}} {{timestamp}}"
   }]
 }

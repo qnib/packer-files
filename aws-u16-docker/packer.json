@@ -2,7 +2,9 @@
   "variables": {
         "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
         "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
-        "region":         "us-east-1"
+        "region":         "us-east-1",
+        "ami_name":       "aws-docker"
+
   },
   "provisioners": [
     {
@@ -31,6 +33,6 @@
     "source_ami": "ami-da05a4a0",
     "instance_type": "t2.micro",
     "ssh_username": "ubuntu",
-    "ami_name": "aws-docker {{timestamp}}"
+    "ami_name": "{{user `ami_name`}} {{timestamp}}"
   }]
 }
