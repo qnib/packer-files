@@ -1,0 +1,12 @@
+[Unit]
+Description=Create shares and enables server
+#After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/configure-nfs-server.sh
+RemainAfterExit=true
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target

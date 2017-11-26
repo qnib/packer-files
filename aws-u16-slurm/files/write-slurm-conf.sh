@@ -10,6 +10,9 @@ sleep 1
 echo ">> Run `confd -onetime -backend env`"
 confd -onetime -backend env
 
+echo ">> Start slurmctld with a clean slate (-c)"
+sed -i -e 's/#SLURMCTLD_OPTIONS=.*/SLURMCTLD_OPTIONS="-c"/' /etc/default/slurmctld
+
 if [[ -f /home/ubuntu/etc/hosts.new ]];then
   echo ">> Add fixed set of hosts to /etc/hosts"
   echo "" >> /etc/hosts
@@ -18,11 +21,13 @@ if [[ -f /home/ubuntu/etc/hosts.new ]];then
   cat /home/ubuntu/etc/hosts.new >> /etc/hosts
   #rm -f /home/ubuntu/etc/hosts.new
 fi
-sleep 1
-echo ">> Start slurmctld/slurmd"
-if [[ $(hostname) == "master0" ]];then
+
+sleep 10
+if [[ $(cat /opt/slurm-type) == "master" ]];then
+  echo ">> Start slurmctld"
   systemctl start slurmctld
 fi
+echo ">> Start slurmd"
 systemctl start slurmd
 
 echo ">> Restart doxy for good measure"

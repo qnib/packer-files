@@ -1,8 +1,9 @@
 #!/bin/bash
 #
 #SBATCH --job-name=nvidia-smi-list
-#
+#SBATCH --output=/chome/${USER}/slurm-%J.txt
 #SBATCH --ntasks=1
+
 export DOCKER_HOST=unix:///var/run/hpc.sock
 echo ">> Pull container image: docker pull nvidia/cuda"
 docker pull nvidia/cuda 2>&1 >/dev/null

@@ -29,12 +29,24 @@
        "destination": "/home/ubuntu/munge.key"
     },{
        "type": "file",
-       "source": "files/slurm/job-gpu.sh",
-       "destination": "/home/ubuntu/job-gpu.sh"
-    },{
-       "type": "file",
        "source": "files/systemd/slurmconfig.service",
        "destination": "/home/ubuntu/systemd/slurmconfig.service"
+    },{
+       "type": "file",
+       "source": "files/systemd/nfsclient.service",
+       "destination": "/home/ubuntu/systemd/nfsclient.service"
+    },{
+       "type": "file",
+       "source": "files/configure-nfs-client.sh",
+       "destination": "/home/ubuntu/configure-nfs-client.sh"
+    },{
+       "type": "file",
+       "source": "files/systemd/nfsserver.service",
+       "destination": "/home/ubuntu/systemd/nfsserver.service"
+    },{
+       "type": "file",
+       "source": "files/configure-nfs-server.sh",
+       "destination": "/home/ubuntu/configure-nfs-server.sh"
     },{
        "type": "file",
        "source": "files/confd/templates/slurm.conf.tmpl",
@@ -47,6 +59,30 @@
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "script": "scripts/slurm.sh"
+    },{
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/nfs-client.sh"
+    },{
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/nfs-server.sh"
+    },{
+       "type": "file",
+       "source": "files/slurm/job-gpu.sh",
+       "destination": "/home/ubuntu/slurm/job-gpu.sh"
+    },{
+       "type": "file",
+       "source": "files/src/ring.c",
+       "destination": "/home/ubuntu/src/ring.c"
+    },{
+       "type": "shell",
+       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+       "script": "scripts/openmpi.sh"
+    },{
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/99-cleanup.sh"
     }
   ],
   "builders": [{
