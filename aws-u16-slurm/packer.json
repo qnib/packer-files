@@ -17,6 +17,10 @@
        "destination": "/home/ubuntu/confd/conf.d/slurm.toml"
     },{
        "type": "file",
+       "source": "files/etc/hosts.new",
+       "destination": "/home/ubuntu/etc/hosts.new"
+    },{
+       "type": "file",
        "source": "files/write-slurm-conf.sh",
        "destination": "/home/ubuntu/write-slurm-conf.sh"
     },{
