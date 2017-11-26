@@ -9,7 +9,7 @@
 # See the slurm.conf man page for more information.
 #
 ClusterName=aws
-ControlMachine={{getenv "CONTROL_MACHINE"}}
+ControlMachine=master0
 DebugFlags=NO_CONF_HASH
 
 SlurmUser=slurm
@@ -40,8 +40,13 @@ SelectType=select/linear
 FastSchedule=0
 
 # COMPUTE NODES
-NodeName={{getenv "CONTROL_MACHINE"}} NodeAddr={{getenv "CONTROL_MACHINE_ADDR"}}
+NodeName=master0  NodeAddr=10.0.16.10
+NodeName=cpu0     NodeAddr=10.0.16.20
+NodeName=cpu1     NodeAddr=10.0.16.21
+NodeName=cpu2     NodeAddr=10.0.16.22
+NodeName=gpu0     NodeAddr=10.0.16.30
 
 # Create list
 PartitionName=all Nodes=ALL Default=YES MaxTime=INFINITE State=UP
-#PartitionName=gpu Nodes=ALL Default=YES MaxTime=INFINITE State=UP
+PartitionName=gpu Nodes=gpu0 MaxTime=INFINITE State=UP
+PartitionName=cpu Nodes=cpu[0-3] MaxTime=INFINITE State=UP
