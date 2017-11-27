@@ -2,6 +2,7 @@
 #
 #SBATCH --job-name=nvidia-smi-list
 #SBATCH --output=/chome/${USER}/slurm-%J.txt
+#SBATCH --partition=gpu
 #SBATCH --ntasks=1
 
 export DOCKER_HOST=unix:///var/run/hpc.sock

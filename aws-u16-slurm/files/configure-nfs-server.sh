@@ -25,6 +25,7 @@ useradd --create-home -d /chome/cluser --password $(openssl passwd cluser) cluse
 ## Copy jobscripts and stuff over
 rsync -aP /home/ubuntu/src/. /share/src/.
 rsync -aP /home/ubuntu/slurm/. /share/slurm/.
+rsync -aP /home/ubuntu/bin/. /share/bin/.
 
 chown -R ubuntu: /chome/ubuntu /share/*
 

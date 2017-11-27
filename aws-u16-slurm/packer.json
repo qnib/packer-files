@@ -2,6 +2,7 @@
   "variables": {
         "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
         "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+        "instance_type:" : "t2.micro",
         "region":         "us-east-1",
         "source_ami":     "ami-69c75613",
         "ami_name":       "aws-docker-slurm"
@@ -13,8 +14,8 @@
       "script": "scripts/mkdirs.sh"
     },{
        "type": "file",
-       "source": "files/confd/conf.d/slurm.toml",
-       "destination": "/home/ubuntu/confd/conf.d/slurm.toml"
+       "source": "files/etc/slurm/slurm.conf",
+       "destination": "/home/ubuntu/etc/slurm/slurm.toml"
     },{
        "type": "file",
        "source": "files/etc/hosts.new",
@@ -27,10 +28,18 @@
        "type": "file",
        "source": "files/munge.key",
        "destination": "/home/ubuntu/munge.key"
+     },{
+        "type": "file",
+        "source": "files/systemd/slurmconfig.service",
+        "destination": "/home/ubuntu/systemd/slurmconfig.service"
     },{
-       "type": "file",
-       "source": "files/systemd/slurmconfig.service",
-       "destination": "/home/ubuntu/systemd/slurmconfig.service"
+        "type": "file",
+        "source": "files/systemd/slurmctld.service",
+        "destination": "/home/ubuntu/systemd/slurmctld.service"
+    },{
+        "type": "file",
+        "source": "files/systemd/slurmd.service",
+        "destination": "/home/ubuntu/systemd/slurmd.service"
     },{
        "type": "file",
        "source": "files/systemd/nfsclient.service",
@@ -49,8 +58,8 @@
        "destination": "/home/ubuntu/configure-nfs-server.sh"
     },{
        "type": "file",
-       "source": "files/confd/templates/slurm.conf.tmpl",
-       "destination": "/home/ubuntu/confd/templates/slurm.conf.tmpl"
+       "source": "files/etc/slurm/slurm.conf",
+       "destination": "/etc/slurm/slurm.conf"
     },{
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
@@ -73,6 +82,10 @@
        "destination": "/home/ubuntu/slurm/job-gpu.sh"
     },{
        "type": "file",
+       "source": "files/slurm/job-gpu.sh",
+       "destination": "/home/ubuntu/slurm/job-ring.sh"
+    },{
+       "type": "file",
        "source": "files/src/ring.c",
        "destination": "/home/ubuntu/src/ring.c"
     },{
@@ -91,7 +104,7 @@
     "secret_key": "{{user `aws_secret_key`}}",
     "region": "{{user `region`}}",
     "source_ami": "{{user `source_ami`}}",
-    "instance_type": "t2.micro",
+    "instance_type": "{{user `instance_type`}}",
     "ssh_username": "ubuntu",
     "ami_name": "{{user `ami_name`}} {{timestamp}}"
   }]
