@@ -93,6 +93,10 @@
        "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
        "script": "scripts/openmpi.sh"
     },{
+       "type": "shell",
+       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+       "script": "scripts/cluster-setup.sh"
+    },{
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "script": "scripts/99-cleanup.sh"

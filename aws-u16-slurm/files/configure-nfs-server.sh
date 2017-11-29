@@ -19,9 +19,6 @@ fi
 mkdir -p /share/{slurm,src,bin}
 mkdir -p /chome/ubuntu
 
-echo ">> Create user 'cluser' w/ creating home in /chome/cluser"
-useradd --create-home -d /chome/cluser --password $(openssl passwd cluser) cluser
-
 ## Copy jobscripts and stuff over
 rsync -aP /home/ubuntu/src/. /share/src/.
 rsync -aP /home/ubuntu/slurm/. /share/slurm/.

@@ -9,5 +9,8 @@ mkdir -p /home/ubuntu/{slurm,systemd,etc,bin,src}
 mkdir -p /home/ubuntu/etc/slurm/
 chown -R ubuntu: /home/ubuntu/{confd,systemd,slurm,etc,bin,src}
 
+mkdir -p /share/{bin,slurm,src}
+chown -R ubuntu: /share/{bin,slurm,src}
+
 mkdir -p /etc/slurm/
 chown -R ubuntu: /etc/slurm/

@@ -11,17 +11,13 @@ while [[ ! -f /opt/slurm-type ]];do
     fi
 done
 
-if [[ $(cat /opt/slurm-type) != "client" ]];then
-  echo ">> I am '$(cat /opt/slurm-type)' NOT the client -> exit 0"
+if [[ $(cat /opt/slurm-type) == "master" ]];then
+  echo ">> I am the slurm master, no need to mount myself! -> exit 0"
   exit 0
 fi
 
 set -x
 
-echo ">> Create user 'cluser' w/o creating home in /chome/cluser"
-useradd --no-create-home -d /chome/cluser --password $(openssl passwd cluser) cluser
-
-mkdir -p /chome /share
 echo "${PHOST}:/chome       /chome      nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0" >> /etc/fstab
 echo "${PHOST}:/share       /share      nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0" >> /etc/fstab
 CNT=60

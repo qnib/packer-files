@@ -14,8 +14,6 @@ apt-get install -y \
   libevent-dev \
   libgtk2.0-dev \
   libmunge-dev \
-  libpmi2-0 \
-  libpmi2-0-dev \
   libtool \
   make \
   munge
