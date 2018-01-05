@@ -42,7 +42,6 @@
                    "http://dl-cdn.alpinelinux.org/alpine/v3.6/releases/x86_64/alpine-standard-3.6.2-x86_64.iso"],
       "iso_checksum": "ddf8b91cc0d2b1c110f26607d410e5c951eedff9c60d6eb05d220b87c1970840",
       "iso_checksum_type": "sha256",
-
       "communicator": "ssh",
       "ssh_username": "root",
       "ssh_password": "vagrant",
