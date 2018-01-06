@@ -7,20 +7,16 @@
     "cpu": "x86_64",
     "virtualbox_guest_os_type": "Linux26_64",
     "variant": "docker",
-    "disk_size": "10240",
+    "disk_size": "40960",
+    "cpu": "x86_64",
     "mem_size": "512",
     "ssh_username": "root",
     "ssh_password": "vagrant",
     "root_password": "vagrant",
     "vagrant_username": "vagrant",
     "vagrant_password": "vagrant",
-    "remote_username": "{{env `REMOTE_USERNAME`}}",
-    "remote_password": "{{env `REMOTE_PASSWORD`}}",
-    "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "remote_host": "",
-    "box_version": "7.0.20171202",
-    "headless": "false",
-    "iso_checksum_type": "sha256"
+    "box_version": "7.0.20180106.1",
+    "headless": "false"
   },
   "builders": [
     {
@@ -37,9 +33,9 @@
       "ssh_username": "{{user `ssh_username`}}",
       "ssh_password": "{{user `ssh_password`}}",
       "ssh_port": 22,
-      "ssh_wait_timeout": "300s",
+      "ssh_wait_timeout": "10000s",
       "shutdown_command": "poweroff",
-      "guest_additions_mode": "attach",
+      "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
       "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-virtualbox",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
@@ -70,9 +66,17 @@
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "wget -O /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
         "sh /tmp/install.sh<enter><wait>"
-
       ]
     }
   ],
@@ -80,10 +84,9 @@
     {
       "type": "shell",
       "scripts": [
-        "provisioners/alpine_upgrade.sh",
-        "provisioners/vagrant.sh",
-        "provisioners/docker.sh",
-        "provisioners/vboxguest.sh"
+        "./provisioners/vagrant.sh",
+        "provisioners/vboxguest.sh",
+        "provisioners/docker.sh"
       ],
       "environment_vars": [
         "ROOT_PASSWORD={{user `root_password`}}",
@@ -93,15 +96,16 @@
     },
     {
       "type": "shell",
+      "start_retry_timeout": "5m",
       "only": ["virtualbox-iso"],
       "scripts": [
-        "provisioners/disk_cleanup.sh"
+        "./provisioners/disk_cleanup.sh"
       ]
     },
     {
       "type": "shell",
       "scripts": [
-        "provisioners/cleanup.sh"
+        "./provisioners/cleanup.sh"
       ]
     }
   ],
@@ -111,7 +115,7 @@
       "only": ["virtualbox-iso"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{.Provider}}.box",
-      "vagrantfile_template": "Vagrantfile"
+      "vagrantfile_template": "./Vagrantfile"
     }
   ]
 }
