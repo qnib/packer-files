@@ -2,7 +2,7 @@
 UCP_VERSION=${1}
 
 if [[ "X${UCP_VERSION}" == "X" ]];then
-  echo ">> Please provide UCP_VERSION as argument: ./${0} 2.2.4"
+  echo ">> Please provide UCP_VERSION as argument: ./${0} 2.2.5"
   exit 1
 fi
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-: ${UCP_VERSION:=2.2.3}
+: ${UCP_VERSION:=2.2.5}
 
 service docker start
 docker ps >/dev/null
