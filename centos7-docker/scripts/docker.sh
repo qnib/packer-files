@@ -10,6 +10,6 @@ yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo
 yum install -y docker-ce
-wget -qO- https://github.com/qnib/docker-ce/releases/download/v${DOCKER_VER}-ce/docker-${DOCKER_VER}-ce.tar.gz |tar xfz - -C /
+#wget -qO- https://github.com/qnib/docker-ce/releases/download/v${DOCKER_VER}-ce/docker-${DOCKER_VER}-ce.tar.gz |tar xfz - -C /
 systemctl enable docker
 mkdir -p /etc/docker/
