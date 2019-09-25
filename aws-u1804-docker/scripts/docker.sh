@@ -5,3 +5,5 @@ add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(
 apt-get update
 rm -f /var/lib/dpkg/lock
 apt-get install -y --allow-unauthenticated docker-ce
+systemctl enable docker
+usermod -aG docker ubuntu

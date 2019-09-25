@@ -8,4 +8,4 @@ sleep 5
 
 apt-get update
 rm -f /var/lib/dpkg/lock
-apt-get install -y curl
+apt-get install -y curl jq
