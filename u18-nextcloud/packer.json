@@ -1,0 +1,43 @@
+{
+  "variables": {
+        "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+        "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+        "docker_ee_url": "{{env `DOCKER_EE_URL`}}",
+        "region":         "eu-west-1",
+        "ami_name":       "aws-nextflow",
+        "source_ami":     "ami-06358f49b5839867c"
+  },
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/01-base.sh"
+    },{
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}' {{user `docker_ee_url`}}",
+      "script": "scripts/02-apache.sh"
+    },{
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}' {{user `docker_ee_url`}}",
+      "script": "scripts/03-confd.sh"
+    },{
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/04-nextcloud.sh"
+    },{
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/05-prometheus.sh"
+    } 
+  ],
+  "builders": [{
+    "type": "amazon-ebs",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "region": "{{user `region`}}",
+    "source_ami": "{{user `source_ami`}}",
+    "instance_type": "t2.micro",
+    "ssh_username": "ubuntu",
+    "ami_name": "{{user `ami_name`}} {{timestamp}}"
+  }]
+}
