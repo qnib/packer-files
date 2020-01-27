@@ -16,15 +16,5 @@ ExecStart=/usr/local/bin/nextcloud-exporter
 WantedBy=multi-user.target
 EOF
 
-## confd
-#aws ssm put-parameter --type String --name /nextcloud/serverinfo/endpoint --value localhost
-#aws ssm put-parameter --type String --name /nextcloud/serverinfo/protocol --value http
-#aws ssm put-parameter --type String --type SecureString --name /nextcloud/serverinfo/username --value admin
-#aws ssm put-parameter --type String --type SecureString --name /nextcloud/serverinfo/password --value admin
-cat << EOF > /etc/sysconfig/nextcloud_exporter
-NEXTCLOUD_SERVERINFO_URL={{getv "/nextcloud/serverinfo/protocol"}}://{{getv "/nextcloud/serverinfo/endpoint"}}/ocs/v2.php/apps/serverinfo/api/v1/info
-NEXTCLOUD_USERNAME={{getv "/nextcloud/serverinfo/username"}}
-NEXTCLOUD_PASSWORD={{getv "/nextcloud/serverinfo/password"}}
-EOF
-chmod 700 /etc/sysconfig/nextcloud_exporter
+mkdir -p /etc/sysconfig
 systemctl enable nextcloud_exporter

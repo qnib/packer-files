@@ -4,11 +4,39 @@
         "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
         "docker_ee_url": "{{env `DOCKER_EE_URL`}}",
         "region":         "eu-west-1",
-        "ami_name":       "aws-nextflow",
+        "ami_name":       "aws-nextcloud",
         "source_ami":     "ami-06358f49b5839867c"
   },
   "provisioners": [
     {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/00-pre-files.sh"
+    },{
+      "type": "file",
+      "source": "files/bin/setup-nextcloud.sh",
+      "destination": "/home/vagrant/files/bin/setup-nextcloud.sh"
+    },{
+      "type": "file",
+      "source": "files/etc/confd/templates/nextcloud-exporter.tmpl",
+      "destination": "/home/vagrant/files/etc/confd/templates/nextcloud-exporter.tmpl"
+    },{
+      "type": "file",
+      "source": "files/etc/confd/conf.d/nextcloud-exporter.toml",
+      "destination": "/home/vagrant/files/etc/confd/conf.d/nextcloud-exporter.toml"
+    },{
+      "type": "file",
+      "source": "files/etc/confd/templates/config.php.tmpl",
+      "destination": "/home/vagrant/files/etc/confd/templates/config.php.tmpl"
+    },{
+      "type": "file",
+      "source": "files/etc/confd/conf.d/nextcloud-config.toml",
+      "destination": "/home/vagrant/files/etc/confd/conf.d/nextcloud-config.toml"
+    },{
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/00-files.sh"
+    },{
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "script": "scripts/01-base.sh"

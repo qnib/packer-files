@@ -1,0 +1,8 @@
+[template]
+src = "nextcloud-exporter.tmpl"
+dest = "/etc/sysconfig/nextcloud_exporter"
+reload_cmd = "systemctl restart nextcloud_exporter"
+mode = "0600"
+keys = [
+    "/dev/nextcloud",
+]

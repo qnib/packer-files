@@ -1,0 +1,23 @@
+<?php
+$CONFIG = array (
+  'instanceid' => '{{getv "/PREFIX/nextcloud/instanceid"}}',
+  'passwordsalt' => '{{getv "/PREFIX/nextcloud/passwordsalt"}}',
+  'secret' => '{{getv "/PREFIX/nextcloud/secret"}}',
+  'trusted_domains' =>
+  array (
+    0 => '{{getv "/PREFIX/nextcloud/domain"}}',
+  ),
+  'datadirectory' => '/var/www/html/data',
+  'dbtype' => 'mysql',
+  'version' => '{{getv "/PREFIX/nextcloud/database/version"}}',
+  'overwrite.cli.url' => 'http://{{getv "/PREFIX/nextcloud/domain"}}',
+  'dbname' => '{{getv "/PREFIX/nextcloud/database/name"}}',
+  'dbhost' => '{{getv "/PREFIX/nextcloud/database/name"}}.{{getv "/PREFIX/nextcloud/database/cluster"}}.{{getv "/PREFIX/nextcloud/database/region"}}.rds.amazonaws.com',
+  'dbport' => '',
+  'dbtableprefix' => 'oc_',
+  'dbuser' => '{{getv "/PREFIX/nextcloud/database/user"}}',
+  'dbpassword' => '{{getv "/PREFIX/nextcloud/database/password"}}',
+  'installed' => true,
+  'session_lifefime' => 600,
+  'session_keepalive' => false,
+);

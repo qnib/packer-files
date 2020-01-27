@@ -10,4 +10,5 @@ export DEBIAN_FRONTEND=noninteractive
 apt-get update
 apt-get upgrade -y
 rm -f /var/lib/dpkg/lock
-apt-get install -y curl wget
+sleep 3
+apt-get install -y curl wget awscli

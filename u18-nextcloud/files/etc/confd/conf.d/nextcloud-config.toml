@@ -1,0 +1,8 @@
+[template]
+src = "config.php.tmpl"
+dest = "/var/www/html/config/config.php"
+check_cmd = "/bin/chown www-data: {{.src}}"
+mode = "0644"
+keys = [
+    "/dev/nextcloud",
+]
