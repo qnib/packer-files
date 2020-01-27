@@ -1,0 +1,40 @@
+{
+    "securityChecks": true,
+    "OCIBundleDir": "/opt/sarus/var/OCIBundleDir",
+    "rootfsFolder": "rootfs",
+    "prefixDir": "/opt/sarus",
+    "tempDir": "/tmp",
+    "localRepositoryBaseDir": "/home",
+    "centralizedRepositoryDir": "/var/sarus/centralized_repository",
+    "mksquashfsPath": "/usr/bin/mksquashfs",
+    "runcPath": "/opt/sarus/bin/runc.amd64",
+    "ramFilesystemType": "tmpfs",
+    "siteMounts": [
+        {
+            "type": "bind",
+            "source": "/home",
+            "destination": "/home",
+            "flags": {}
+        }
+    ],
+    "OCIHooks": {
+        "prestart": [
+            {
+                "path": "/opt/sarus/bin/nvidia-container-toolkit-3.1.4",
+                "args": ["/opt/sarus/bin/nvidia-container-toolkit-3.1.4", "-debug", "-config=/etc/nvidia-container-runtime/config.toml", "prestart"],
+                "env": [
+                    "PATH=/usr/local/libnvidia-container_1.0.6/bin",
+                    "LD_LIBRARY_PATH=/usr/local/libnvidia-container_1.0.6/lib"
+                ]
+            },{
+                "path": "/opt/sarus/bin/mpi_hook",
+                "env": [
+                        "SARUS_MPI_LIBS=/usr/local/lib/libmpi.so:/usr/local/lib/libmpicxx.so",
+                        "SARUS_MPI_DEPENDENCY_LIBS=",
+                        "SARUS_MPI_BIND_MOUNTS=/dev/infiniband/uverbs0",
+                        "PATH=/sbin"
+            ]
+        }
+        ]
+    }
+}

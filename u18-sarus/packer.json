@@ -1,0 +1,51 @@
+{
+  "variables": {
+        "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+        "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+        "docker_ee_url": "{{env `DOCKER_EE_URL`}}",
+        "region":         "eu-west-1",
+        "ami_name":       "eu-sarus",
+        "source_ami":     "ami-02df9ea15c1778c9c"
+  },
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/00-pre-files.sh"
+    },{
+      "type": "file",
+      "source": "files/opt/sarus/etc/sarus.json",
+      "destination": "/home/vagrant/files/opt/sarus/etc/sarus.json"
+    },{
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/01-base.sh"
+    },{
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}' {{user `docker_ee_url`}}",
+      "script": "scripts/02-sarus.sh"
+    },{
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}' {{user `docker_ee_url`}}",
+      "script": "scripts/03-nvidia.sh"
+    },{
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}' {{user `docker_ee_url`}}",
+      "script": "scripts/04-mpi.sh"
+    },{
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/00-files.sh"
+    } 
+  ],
+  "builders": [{
+    "type": "amazon-ebs",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "region": "{{user `region`}}",
+    "source_ami": "{{user `source_ami`}}",
+    "instance_type": "t2.micro",
+    "ssh_username": "ubuntu",
+    "ami_name": "{{user `ami_name`}} {{timestamp}}"
+  }]
+}
