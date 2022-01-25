@@ -1,3 +1,2 @@
 #!/bin/bash -eux
-
-systemctl enable vboxadd.service
+yum install -y screen vim wget rsync

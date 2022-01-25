@@ -1,9 +1,5 @@
 #!/bin/bash -eux
 
-dnf config-manager --set-enabled powertools
-dnf install -y epel-release
-
-
 yum install -y gcc \
     gtk2-devel \
     hwloc \

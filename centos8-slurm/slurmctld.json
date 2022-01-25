@@ -1,0 +1,38 @@
+{
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/slurmctld/01-mkdirs.sh"
+    },{
+      "type": "file",
+      "source": "files/etc/slurm/slurm.conf",
+      "destination": "/home/vagrant/etc/slurm/slurm.conf"
+    },{
+      "environment_vars": [
+        "http_proxy={{ user `proxy` }}",
+        "guest_additions_mode={{ user `guest_additions` }}"
+      ],
+      "execute_command": "echo 'vagrant'|sudo -S {{ .Vars }} bash '{{.Path}}'",
+      "scripts": [
+        "scripts/slurmctld/02-users.sh",
+        "scripts/slurmctld/10-setup-slurm.sh",
+        "scripts/slurmctld/20-nfsd.sh",
+        "scripts/32-hpc-engines.sh",
+        "scripts/50-spack.sh",
+        "scripts/98-cleanup.sh",
+        "scripts/99-minimize.sh"
+      ],
+      "type": "shell"
+    }
+  ],
+  "builders": [
+    {
+      "communicator": "ssh",
+      "source_path": "centos8-slurm",
+      "provider": "virtualbox",
+      "add_force": true,
+      "type": "vagrant"
+    }
+  ]
+}

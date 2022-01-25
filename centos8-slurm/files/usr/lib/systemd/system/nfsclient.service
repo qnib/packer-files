@@ -1,0 +1,12 @@
+[Unit]
+Description=Write fstab and mount /nfs/home and /nfs/shared
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/configure-nfs-client.sh
+RemainAfterExit=true
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target
