@@ -1,8 +1,15 @@
 #!/bin/bash -eux
 yum install -y git gcc-c++
-
+groupadd -g 2001 spack
 git clone -c feature.manyFiles=true https://github.com/spack/spack.git /opt/spack
 
+mkdir -p /nfs/share/spack/{pkg,cache}
+chmod 775 -R /nfs/share/spack/{pkg,cache}
+chgrp -R spack /nfs/share/spack/{pkg,cache}
+## Spack modules
+mkdir -p  /nfs/share/spack/{modules,lmod}
+chmod 775 -R  /nfs/share/spack/{modules,lmod}
+chgrp -R spack /nfs/share/spack/{modules,lmod}
 
 cat > /etc/profile.d/spack.sh <<EOF
 source /opt/spack/share/spack/setup-env.sh
