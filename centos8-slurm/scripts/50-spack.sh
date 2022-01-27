@@ -1,6 +1,6 @@
 #!/bin/bash -eux
-yum install -y git gcc-c++
-groupadd -g 2001 spack
+yum install -y git gcc-c++ gcc-gfortran autoconf
+groupadd -g 3000 spack
 git clone -c feature.manyFiles=true https://github.com/spack/spack.git /opt/spack
 
 mkdir -p /nfs/share/spack/{pkg,cache}
@@ -98,8 +98,8 @@ compilers:
     paths:
       cc: /usr/bin/gcc
       cxx: /usr/bin/g++
-      f77: null
-      fc: null
+      f77: /usr/bin/gfortran
+      fc: /usr/bin/gfortran
     flags: {}
     operating_system: centos8
     target: x86_64
