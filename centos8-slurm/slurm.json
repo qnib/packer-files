@@ -22,7 +22,7 @@
   "builders": [
     {
       "communicator": "ssh",
-      "source_path": "centos8-hpc-vb",
+      "source_path": "centos8-hpc",
       "provider": "virtualbox",
       "add_force": true,
       "type": "vagrant"
