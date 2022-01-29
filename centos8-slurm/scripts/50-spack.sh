@@ -1,7 +1,11 @@
 #!/bin/bash -eux
 yum install -y git gcc-c++ gcc-gfortran autoconf
+pip3 install boto3 awscli
 groupadd -g 3000 spack
+usermod -aG spack vagrant
 git clone -c feature.manyFiles=true https://github.com/spack/spack.git /opt/spack
+
+### Enable binary cache
 
 mkdir -p /nfs/share/spack/{pkg,cache}
 chmod 775 -R /nfs/share/spack/{pkg,cache}
@@ -10,6 +14,12 @@ chgrp -R spack /nfs/share/spack/{pkg,cache}
 mkdir -p  /nfs/share/spack/{modules,lmod}
 chmod 775 -R  /nfs/share/spack/{modules,lmod}
 chgrp -R spack /nfs/share/spack/{modules,lmod}
+### 
+##Error: [Errno 13] Permission denied: '/nfs/share/spack/pkg/.spack-db'
+source /opt/spack/share/spack/setup-env.sh
+export BUILD_CACHE=spack-vagrant-bins
+spack mirror add ${BUILD_CACHE} "s3://${BUILD_CACHE}.qnib.org"
+
 
 cat > /etc/profile.d/spack.sh <<EOF
 source /opt/spack/share/spack/setup-env.sh
