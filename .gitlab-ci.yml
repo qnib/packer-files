@@ -14,4 +14,4 @@ build_rocky8-slurm:
     – packer build --force slurm.json
     - vagrant box add --name rocky8-slurm --force output-vagrant/package.box
   tags:
-    #- packer
+    - packer
