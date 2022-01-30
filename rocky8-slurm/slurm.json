@@ -27,6 +27,7 @@
         "scripts/slurm/13-slurm.sh",
         "scripts/30-hostservice.sh",
         "scripts/50-spack.sh",
+        "scripts/90virtualbox.sh",
         "scripts/98-cleanup.sh",
         "scripts/99-minimize.sh"
       ],
