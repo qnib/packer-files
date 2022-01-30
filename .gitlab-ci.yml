@@ -1,5 +1,5 @@
 stages:
-  – build
+  – "build"
 
 builc_rocky8-slurm:
   stage: build
