@@ -1,17 +1,31 @@
-stages: ["build"]
+stages: 
+- base
+- slurm
 
-test:
-  stage: build
-  script: 
-    - echo Hello World
-  tags:
-    - packer
 
 build_rocky8-slurm:
-  stage: build
+  stage: base
   script:
   - cd rocky8-slurm
   - packer build --force slurm.json
   - vagrant box add --name rocky8-slurm --force output-vagrant/package.box
+  tags:
+    - packer
+
+build_rocky8-slurmctld:
+  stage: slurm
+  script:
+  - cd rocky8-slurm
+  - packer build --force slurmctld.json
+  - vagrant box add --name rocky8-slurmctld --force output-vagrant/package.box
+  tags:
+    - packer
+
+build_rocky8-slurmd:
+  stage: slurm
+  script:
+  - cd rocky8-slurm
+  - packer build --force slurmd.json
+  - vagrant box add --name rocky8-slurmd --force output-vagrant/package.box
   tags:
     - packer
