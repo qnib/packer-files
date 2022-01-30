@@ -1,9 +1,14 @@
 #!/bin/bash -eux
 yum install -y git gcc-c++ gcc-gfortran autoconf
 pip3 install boto3 awscli
+
+cat > /etc/profile.d/spack.sh << \EOF
+export PATH="${PATH}:/usr/local/bin"
+EOF
 groupadd -g 3000 spack
 usermod -aG spack vagrant
 git clone -c feature.manyFiles=true https://github.com/spack/spack.git /opt/spack
+
 
 ### Enable binary cache
 
@@ -20,6 +25,14 @@ cat > /opt/spack/etc/spack/mirrors.yaml << EOF
 mirrors:
   spack-vagrant-bins:
     fetch:
+      url: s3://spack-vagrant-bins.qnib.org
+      access_pair:
+      - null
+      - null
+      access_token: null
+      profile: null
+      endpoint_url: null
+    push:
       url: s3://spack-vagrant-bins.qnib.org
       access_pair:
       - null
@@ -115,12 +128,12 @@ compilers:
 - compiler:
     spec: gcc@8.5.0
     paths:
-      cc: /usr/bin/gcc
-      cxx: /usr/bin/g++
-      f77: /usr/bin/gfortran
-      fc: /usr/bin/gfortran
+      cc: /bin/gcc
+      cxx: /bin/g++
+      f77: /bin/gfortran
+      fc: /bin/gfortran
     flags: {}
-    operating_system: centos8
+    operating_system: rocky8
     target: x86_64
     modules: []
     environment: {}

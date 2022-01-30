@@ -19,7 +19,6 @@
         "scripts/slurmctld/10-setup-slurm.sh",
         "scripts/slurmctld/20-nfsd.sh",
         "scripts/32-hpc-engines.sh",
-        "scripts/50-spack.sh",
         "scripts/98-cleanup.sh",
         "scripts/99-minimize.sh"
       ],

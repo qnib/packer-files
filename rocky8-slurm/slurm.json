@@ -13,6 +13,8 @@
         "scripts/slurm/11-munge.sh",
         "scripts/slurm/12-mariadb.sh",
         "scripts/slurm/13-slurm.sh",
+        "scripts/50-spack.sh",
+        "scripts/60-hosts.sh",
         "scripts/98-cleanup.sh",
         "scripts/99-minimize.sh"
       ],
