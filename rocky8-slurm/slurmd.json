@@ -39,7 +39,7 @@
   "builders": [
     {
       "communicator": "ssh",
-      "source_path": "centos8-slurm",
+      "source_path": "rocky8-slurm",
       "provider": "virtualbox",
       "add_force": true,
       "type": "vagrant"
