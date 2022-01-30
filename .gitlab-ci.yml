@@ -1,9 +1,6 @@
 stages:
   – build
 
-before_script:
-  – git config –global http.sslVerify false
-
 builc_rocky8-slurm:
   stage: build
   script:
