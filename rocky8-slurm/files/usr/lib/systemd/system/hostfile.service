@@ -1,0 +1,12 @@
+[Unit]
+Description=Add hosts to /etc/hosts
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/adjust-hosts.sh
+RemainAfterExit=true
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target

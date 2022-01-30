@@ -1,6 +1,18 @@
 {
   "provisioners": [
     {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/01-mkdirs.sh"
+    },{
+      "type": "file",
+      "source": "files/usr/lib/systemd/system/hostfile.service",
+      "destination": "/home/vagrant/usr/lib/systemd/system/hostfile.service"
+    },{
+      "type": "file",
+      "source": "files/usr/local/bin/configure-nfs-client.sh",
+      "destination": "/home/vagrant/usr/local/bin/adjust-hosts.sh"
+    },{
       "environment_vars": [
         "http_proxy={{ user `proxy` }}",
         "guest_additions_mode={{ user `guest_additions` }}"
@@ -13,8 +25,8 @@
         "scripts/slurm/11-munge.sh",
         "scripts/slurm/12-mariadb.sh",
         "scripts/slurm/13-slurm.sh",
+        "scripts/30-hostservice.sh",
         "scripts/50-spack.sh",
-        "scripts/60-hosts.sh",
         "scripts/98-cleanup.sh",
         "scripts/99-minimize.sh"
       ],
