@@ -1,0 +1,48 @@
+{
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/slurmd/01-mkdirs.sh"
+    },{
+        "type": "file",
+        "source": "files/etc/slurm/slurm.conf",
+        "destination": "/home/vagrant/etc/slurm/slurm.conf"
+    },{
+      "type": "file",
+      "source": "files/usr/lib/systemd/system/nfsclient.service",
+      "destination": "/home/vagrant/usr/lib/systemd/system/nfsclient.service"
+    },{
+      "type": "file",
+      "source": "files/usr/local/bin/configure-nfs-client.sh",
+      "destination": "/home/vagrant/usr/local/bin/configure-nfs-client.sh"
+    },{
+      "environment_vars": [
+        "http_proxy={{ user `proxy` }}",
+        "guest_additions_mode={{ user `guest_additions` }}"
+      ],
+      "execute_command": "echo 'vagrant'|sudo -S {{ .Vars }} bash '{{.Path}}'",
+      "scripts": [
+        "scripts/00-basics.sh",
+        "scripts/slurmd/02-users.sh",
+        "scripts/slurmd/10-setup-slurmd.sh",
+        "scripts/slurmd/20-nfs-client.sh",
+        "scripts/31-container-runtimes.sh",
+        "scripts/32-hpc-engines.sh",
+        "scripts/40-mpi.sh",
+        "scripts/98-cleanup.sh",
+        "scripts/99-minimize.sh"
+      ],
+      "type": "shell"
+    }
+  ],
+  "builders": [
+    {
+      "communicator": "ssh",
+      "source_path": "centos8-slurm",
+      "provider": "virtualbox",
+      "add_force": true,
+      "type": "vagrant"
+    }
+  ]
+}
